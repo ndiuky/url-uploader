@@ -4,9 +4,22 @@
   "type": "module",
   "private": true,
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "husky": "^9.1.7",
+    "prettier": "^3.5.3"
+  },
+  "scripts": {
+    "start": "bun ./src/",
+    "dev": "bun --watch ./src",
+    "format": "prettier --write .",
+    "prepare": "husky"
   },
   "peerDependencies": {
     "typescript": "^5"
+  },
+  "dependencies": {
+    "axios": "^1.8.4",
+    "dotenv": "^16.4.7",
+    "grammy": "^1.35.1"
   }
 }
