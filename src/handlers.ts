@@ -1,18 +1,9 @@
-import { Bot, InputFile } from "grammy";
-import { botToken } from "./config";
+import { Context, InputFile } from "grammy";
 import { isValidURL } from "./utils/URLcheck";
 import { uploader } from "./utils/uploadFromURL";
 
-const bot = new Bot(botToken as string);
-
-export const getBot = async () => {
-  bot.catch(console.error);
-
-  return bot;
-};
-
-bot.command("upload", async (ctx) => {
-  const url = ctx.match;
+export const urlUploadHandler = async (ctx: Context) => {
+  const url = ctx.match as string;
 
   if (!url) {
     ctx.reply("URL не был введен");
@@ -27,4 +18,4 @@ bot.command("upload", async (ctx) => {
       console.error(error);
     }
   }
-});
+};
