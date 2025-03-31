@@ -4,6 +4,7 @@
   "type": "module",
   "private": true,
   "devDependencies": {
+    "@types/axios": "^0.14.4",
     "@types/bun": "latest",
     "husky": "^9.1.7",
     "prettier": "^3.5.3"

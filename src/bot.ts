@@ -1,6 +1,7 @@
-import { Bot } from "grammy";
+import { Bot, InputFile } from "grammy";
 import { botToken } from "./config";
 import { isValidURL } from "./utils/URLcheck";
+import { uploader } from "./utils/uploadFromURL";
 
 const bot = new Bot(botToken as string);
 
@@ -10,7 +11,7 @@ export const getBot = async () => {
   return bot;
 };
 
-bot.command("upload", (ctx) => {
+bot.command("upload", async (ctx) => {
   const url = ctx.match;
 
   if (!url) {
@@ -18,6 +19,12 @@ bot.command("upload", (ctx) => {
   } else if (!isValidURL(url)) {
     ctx.reply(`${url} не ялвялется URL`);
   } else {
-    ctx.reply("это URL");
+    try {
+      const fileName = await uploader(url);
+      ctx.replyWithDocument(new InputFile(fileName));
+    } catch (error) {
+      ctx.reply("Произошла ошибка при загрузке файла");
+      console.error(error);
+    }
   }
 });
