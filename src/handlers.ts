@@ -28,7 +28,7 @@ export const urlUploadHandler = async (ctx: Context) => {
       const fileName = await uploader(url);
       ctx.replyWithDocument(new InputFile(fileName));
     } catch (error) {
-      ctx.reply("Произошла ошибка при загрузке файла");
+      ctx.reply("⚠ файл пустой или не существует");
       console.error(error);
     }
   }
